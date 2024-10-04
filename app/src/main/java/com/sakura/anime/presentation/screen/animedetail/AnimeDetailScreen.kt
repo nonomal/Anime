@@ -165,9 +165,18 @@ fun AnimeDetailScreen(
                 var showBottomSheet by remember { mutableStateOf(false) }
                 var showDownloadBottomSheet by remember { mutableStateOf(false) }
 
+                val background = Color(
+                    ColorUtils.blendARGB(
+                        MaterialTheme.colorScheme.background.toArgb(),
+                        MaterialTheme.colorScheme.primaryContainer.toArgb(),
+                        0.05f
+                    )
+                )
+
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
+                        .background(background)
                         .verticalScroll(scrollState)
                 ) {
 
@@ -194,15 +203,7 @@ fun AnimeDetailScreen(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(top = bannerHeight)
-                            .background(
-                                Color(
-                                    ColorUtils.blendARGB(
-                                        MaterialTheme.colorScheme.background.toArgb(),
-                                        MaterialTheme.colorScheme.primaryContainer.toArgb(),
-                                        0.05f
-                                    )
-                                )
-                            ),
+                            .background(background),
                         verticalArrangement = Arrangement.spacedBy(dimensionResource(Res.dimen.large_padding))
                     ) {
                         AnimeDetails(

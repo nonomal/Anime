@@ -42,7 +42,7 @@ class WebViewUtil {
      */
     suspend fun interceptRequest(
         url: String,
-        regex: String,
+        regex: String = ".mp4|.m3u8",
         predicate: suspend (requestUrl: String) -> Boolean = { false },
         filterRequestUrl: Array<String> = arrayOf(),
         timeoutMs: Long = 10_000L
@@ -73,7 +73,6 @@ class WebViewUtil {
                         }
                     }
                 }
-
             }
 
             webView?.loadUrl(url) // 加载视频播放所在的Web网页
@@ -152,7 +151,7 @@ class WebViewUtil {
     }
 
     fun clearWeb() {
-        createWebView()
+//        createWebView()
         webView?.clear()
         destroyWebView()
     }

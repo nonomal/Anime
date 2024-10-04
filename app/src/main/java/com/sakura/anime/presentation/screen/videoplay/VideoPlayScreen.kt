@@ -153,10 +153,10 @@ private val Resizes = arrayOf(
 fun VideoPlayScreen(
     viewModel: VideoPlayViewModel = hiltViewModel(),
     onBackClick: () -> Unit,
-    activity: Activity
 ) {
     val animeVideoState by viewModel.videoState.collectAsState()
     val view = LocalView.current
+    val activity = LocalContext.current as Activity
 
     // Handle screen orientation and screen-on state
     ManageScreenState(view, activity)
@@ -186,6 +186,7 @@ fun VideoPlayScreen(
                     url = video.url,
                     videoPosition = video.lastPosition,
                     playerState = playerState,
+                    headers = video.headers,
                     onBackPress = { handleBackPress(playerState, onBackClick, view, activity) },
                     modifier = Modifier
                         .focusable()
@@ -610,6 +611,8 @@ private fun VolumeBrightnessIndicator(
                         .padding(dimensionResource(id = R.dimen.medium_padding))
                         .height(2.dp),
                     strokeCap = StrokeCap.Round,
+                    gapSize = 2.dp,
+                    drawStopIndicator = {},
                 )
             }
         }
