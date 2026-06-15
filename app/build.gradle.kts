@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -8,29 +10,43 @@ plugins {
 }
 
 android {
-    namespace = "com.sakura.anime"
-    compileSdk = 35
+    namespace = "com.lanlinju.animius"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.sakura.anime"
-        minSdk = 26
-        targetSdk = 35
-        versionCode = 23
-        versionName = "1.2.2"
+        applicationId = "com.lanlinju.animius"
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = compileSdk
+        versionCode = 36
+        versionName = "1.3.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
 
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
+        val dandanplayAppId = System.getenv("DANDANPLAY_APP_ID") ?: ""
+        val dandanplayAppSecret = System.getenv("DANDANPLAY_APP_SECRET") ?: ""
+        buildConfigField("String", "DANDANPLAY_APP_ID", "\"$dandanplayAppId\"")
+        buildConfigField("String", "DANDANPLAY_APP_SECRET", "\"$dandanplayAppSecret\"")
+    }
+
+    signingConfigs {
+        kotlin.runCatching { System.getenv("KEY_STORE_PASSWORD") }.getOrNull()?.let {
+            create("release") {
+                storeFile = file("../keystore.jks")
+                storePassword = it
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
         }
     }
 
     buildTypes {
         release {
+            isShrinkResources = true
             isMinifyEnabled = true
+            signingConfig = signingConfigs.findByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -46,9 +62,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -80,10 +93,10 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.palette.ktx)
-    implementation("com.google.android.material:material:1.13.0-alpha05")
+    implementation(libs.material)
 
     // navigation component
-    implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation(libs.androidx.navigation.compose)
 
     // jsoup
     implementation(libs.jsoup)
@@ -112,11 +125,12 @@ dependencies {
     implementation(libs.androidx.splashscreen)
 
     // WorkManager
-    implementation("androidx.work:work-runtime-ktx:2.9.1")
+    implementation(libs.androidx.work.runtime.ktx)
 
     // ktor
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.okhttp)
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.client.content.negotiation)
     testImplementation(libs.ktor.client.mock)
@@ -137,4 +151,16 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
+kotlin {
+    jvmToolchain(17)
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
 }

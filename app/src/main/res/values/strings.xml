@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Anime</string>
+    <string name="app_name">Animius</string>
     <string name="txt_empty_result">Oops...! we couldn\'t find the Anime</string>
     <string name="lbl_anime">Anime</string>
     <string name="lbl_related_anime">相关推荐</string>
@@ -12,15 +12,12 @@
     <!-- search   -->
     <string name="lbl_search_placeholder">请输入动漫名</string>
     <string name="lbl_search_empty">什么都没找到啊T T</string>
-    
-    <!-- week  -->
-    <string name="lbl_schedule">时间表</string>
-    <string name="github_repo">GitHub仓库</string>
 
     <string name="my_favourite">我的收藏</string>
     <string name="add_favourite">添加收藏成功！</string>
     <string name="remove_favourite">移除收藏成功！</string>
     <string name="anime_detail">动漫详情页</string>
+    <string name="website_address">网址</string>
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>
@@ -49,6 +46,7 @@
     <string name="external_play">外部播放</string>
     <string name="reload">重新加载</string>
 
+    <!-- download  -->
     <string name="complete">完成</string>
     <string name="unstart">未开始</string>
     <string name="waiting">等待中</string>
@@ -56,12 +54,16 @@
     <string name="retry">重试</string>
     <string name="resume">继续</string>
 
+    <!-- week  -->
+    <string name="lbl_schedule">时间表</string>
+    <string name="github_repo">GitHub仓库</string>
     <string name="switch_source">切换动漫源</string>
     <string name="check_update">检查更新</string>
     <string name="no_new_version">已是最新版本，无需更新</string>
     <string name="check_updates_failed">连接Github超时，检测更新失败</string>
     <string name="cancel">取消</string>
     <string name="confirm">确认</string>
+    <string name="close">关闭</string>
     <string name="download_software">下载更新</string>
     <string name="download_software_failed">下载更新失败</string>
     <string name="software_updates">软件更新</string>
@@ -86,7 +88,7 @@
     <string name="dynamic_image_color_description">根据动漫封面动态更改主题颜色</string>
     <string name="github_release_address">Github发布页</string>
 
-    <!--danmaku settings-->
+    <!-- danmaku settings-->
     <string name="danmaku_settings">弹幕设置</string>
     <string name="enable_danmaku">启用弹幕</string>
     <string name="danmaku_font_preview">弹幕字体预览</string>
@@ -97,4 +99,31 @@
     <string name="danmaku_display_area">显示区域</string>
     <string name="danmaku_font_weight">弹幕字重</string>
     <string name="danmaku_opacity">不透明度</string>
+
+    <!-- 底部导航标签 -->
+    <string name="navbar_week">时间表</string>
+    <string name="navbar_home">"主页"</string>
+    <string name="navbar_favourite">追番</string>
+
+    <!-- Crash -->
+    <string name="crash_screen_title">哦豁！</string>
+    <string name="crash_screen_description">%s 发生了意外错误。建议你反馈时提供崩溃日志。</string>
+    <string name="crash_screen_restart_application">重启应用</string>
+    <string name="pref_dump_crash_logs_summary">将错误日志保存到文件中，以便提供给开发者</string>
+    <string name="pref_dump_crash_logs">导出崩溃日志</string>
+    <string name="action_share">分享</string>
+    <string name="copy_crash_log">复制崩溃日志</string>
+    <string name="crash_log_has_been_copied">崩溃日志已复制</string>
+
+    <string name="auto_check_update">自动检查更新</string>
+    <string name="channel_selection">线路选择</string>
+    <string name="channel_number">线路%1$s</string>
+
+    <!-- 历史记录界面 -->
+    <string name="clear_all_histories">清除全部记录</string>
+    <string name="are_you_sure_you_want_to_clear_all_histories">确定要清除所有历史记录吗？</string>
+
+    <string name="use_download_directory">使用Download目录</string>
+    <string name="auto_continue_play">自动连播</string>
+    <string name="auto_play_next">%1$ds后自动播放下一集...</string>
 </resources>
